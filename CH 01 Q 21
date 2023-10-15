@@ -1,0 +1,13 @@
+;Write a program to calculate the square of 6 by using a loop that adds 6 to the
+;accumulator 6 times.
+[org 0x100]
+mov ax, 6
+l1: add ax,6
+cmp ax,36
+je end
+jmp l1
+end:
+mov [result],ax
+mov ax, 0xc400
+int 0x21
+result :dw 0
