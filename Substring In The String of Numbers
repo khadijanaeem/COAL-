@@ -1,0 +1,52 @@
+
+[org 0x0100]
+     mov ax,1100110010100000b  	 ; push ax
+	  mov bx, 0000000000001101b
+	
+	mov di,0 		;counter
+	mov si,0    ;starting index
+
+
+mov dx, 1000000000000000b
+mov bp, dx
+
+start:
+mov cx, 0000000000001000b
+
+l1:
+
+test ax, dx
+jnz l2
+jz l3
+
+l2:
+test bx,cx
+jnz decrement 
+jz increasesi
+
+l3:
+test bx,cx
+jz decrement 
+jnz increasesi
+
+decrement:
+shr cx,1
+shr dx,1
+add di,1
+cmp di, 4 ; length of substring meaning it is found
+jne l1
+je end
+
+increasesi:
+add si,1
+mov di,0
+shr bp,1
+mov dx,bp
+cmp si , 14
+jne start
+	end1:
+	mov si,0
+	end:
+	mov ax, 0x4c00 
+int 0x21
+
